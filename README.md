@@ -36,10 +36,12 @@ where OrderDate order by OrderDate desc
 limit 10;
 ```
 
-- find all customers that live in London, Madrid, or Brazil. Returns 18 records.
+[x] find all customers that live in London, Madrid, or Brazil. Returns 18 records.
+```
+SELECT * FROM [Customers]
+where country = 'Brazil' or city = 'London' or city = 'Madrid'
 ```
 
-```
 [x] add a customer record for _"The Shire"_, the contact name is _"Bilbo Baggins"_ the address is _"1 Hobbit-Hole"_ in _"Bag End"_, postal code _"111"_ and the country is _"Middle Earth"_.
 ```
 insert into Customers (CustomerName, ContactName, Address, City, PostalCode, Country) 
