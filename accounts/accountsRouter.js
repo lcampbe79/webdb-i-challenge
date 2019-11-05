@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  // const 
   db
     .select('*')
     .from('accounts')
@@ -29,9 +30,15 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/', (req,res) => {
-  db
-    .insert(req.body, 'id')
+router.post('/', (req, res) => {
+  const newPost = req.body
+  if (!newPost.name) {
+    return res.status(404).json({message: "Name is required"})
+  } if (!newPost.budget || isNaN(newPost.budget)) {
+    return res.status(404).json({message: "Budget is required"})
+  }
+  db('accounts')
+    .insert(newPost)
     .into('accounts')
     .then(ids => {
       res.status(200).json(ids)
