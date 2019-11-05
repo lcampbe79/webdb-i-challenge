@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
   db
     .select('*')
     .from('accounts')
-    .where('id')
+    .where('id', '=', id)
     .then(accounts => {
       res.status(200).json(accounts)
     })
@@ -59,7 +59,7 @@ router.put('/:id', (req, res) => {
     return res.status(404).json({message: `No  id was found`})
   } 
   db('accounts')
-    .where(id)
+    .where('id', '=', id)
     .update(changes)
     .then(count => {
       res.status(201).json(count)
@@ -75,7 +75,7 @@ router.delete('/:id', (req, res) => {
     return res.status(404).json({message: `No  id was found`})
   } 
   db('accounts')
-    .where(id)
+    .where('id', '=', id)
     .del()
     .then(count => {
       res.status(200).json(count)

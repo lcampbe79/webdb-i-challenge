@@ -42,10 +42,12 @@ where ContactName = "Bilbo Baggins"
 ```
 --returns 69
 SELECT Distinct City FROM [Customers]
+SELECT count (Distinct City) FROM [Customers] adds the count
 ```
 
 ## (Stretch) Find all suppliers who have names longer than 20 characters. You can use `length(SupplierName)` to get the length of the name
 ```
 --11 records
 SELECT SupplierName FROM Suppliers WHERE LENGTH(SupplierName) > 20
+SELECT * FROM Suppliers WHERE LENGTH(SupplierName) > 20 //gives all columns
 ```
