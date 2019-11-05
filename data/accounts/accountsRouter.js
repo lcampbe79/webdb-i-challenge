@@ -1,6 +1,6 @@
 const express = require('express');
 
-const db = require('../data/dbConfig');
+const db = require('../dbConfig');
 
 const router = express.Router()
 
@@ -17,11 +17,14 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  // const 
+  const id = req.params.id;
+  if(!id) {
+    return res.status(404).json({message: `No  id was found`})
+  } 
   db
     .select('*')
     .from('accounts')
-    .where('id', '=', req.params.id)
+    .where('id')
     .then(accounts => {
       res.status(200).json(accounts)
     })
@@ -49,10 +52,14 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  const {id} = req.params;
+  const id = req.params.id;
   const changes = req.body;
+
+  if(!id) {
+    return res.status(404).json({message: `No  id was found`})
+  } 
   db('accounts')
-    .where({id})
+    .where(id)
     .update(changes)
     .then(count => {
       res.status(201).json(count)
@@ -63,9 +70,12 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  const {id} = req.params;
+  const id = req.params.id;
+  if(!id) {
+    return res.status(404).json({message: `No  id was found`})
+  } 
   db('accounts')
-    .where({id})
+    .where(id)
     .del()
     .then(count => {
       res.status(200).json(count)

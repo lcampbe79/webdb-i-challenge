@@ -1,7 +1,7 @@
 const express = require('express');
 
 //const db = require('./data/dbConfig.js');
-const accountsRouter = require('./accounts/accountsRouter');
+const accountsRouter = require('./data/accounts/accountsRouter');
 
 const server = express();
 
